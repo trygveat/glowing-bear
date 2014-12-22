@@ -1,6 +1,6 @@
 var weechat = angular.module('weechat');
 
-weechat.factory('notifications', ['$rootScope', '$log', 'models', function($rootScope, $log, models) {
+weechat.factory('notifications', ['$rootScope', '$log', 'models', 'settings', function($rootScope, $log, models, settings) {
     // Ask for permission to display desktop notifications
     var requestNotificationPermission = function() {
         // Firefox
@@ -124,7 +124,7 @@ weechat.factory('notifications', ['$rootScope', '$log', 'models', function($root
             notification.close();
         };
 
-        if ($rootScope.soundnotification) {
+        if (settings.soundnotification) {
             // TODO fill in a sound file
             var audioFile = "assets/audio/sonar";
             var soundHTML = '<audio autoplay="autoplay"><source src="' + audioFile + '.ogg" type="audio/ogg" /><source src="' + audioFile + '.mp3" type="audio/mpeg" /></audio>';
