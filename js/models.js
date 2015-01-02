@@ -562,8 +562,6 @@ models.service('models', ['$rootScope', '$filter', function($rootScope, $filter)
             history.recordBufferSwitch(activeBuffer);
         }
 
-        console.log('buffer switched to', activeBuffer.fullName, 'history:', history.get());
-
         $rootScope.$emit('activeBufferChanged', unreadSum);
         $rootScope.$emit('notificationChanged');
         return true;
@@ -603,7 +601,6 @@ models.service('models', ['$rootScope', '$filter', function($rootScope, $filter)
 
     this.switchToPrevNextBuffer = function(forward) {
         var newBufferId = history.getPrevNextBuffer(forward);
-        console.log('switching to buffer:', newBufferId);
         if (newBufferId) {
             this.setActiveBuffer(newBufferId, null, true);
             history.moveInHistory(forward);
