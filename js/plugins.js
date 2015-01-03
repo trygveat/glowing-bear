@@ -280,6 +280,18 @@ plugins.factory('userPlugins', function() {
     imagePlugin.name = 'image';
 
     /*
+     * mp4 video Preview
+     */
+    var videoPlugin = new Plugin(
+        urlPlugin(function(url) {
+            if (url.match(/\.(mp4|webm|ogv)$/)) {
+                return '<video width="75%"><source src="'+url+'"></source></video>';
+            }
+        })
+    );
+    videoPlugin.name = 'video';
+
+    /*
      * Cloud Music Embedded Players
      */
     var cloudmusicPlugin = new Plugin(
@@ -392,7 +404,7 @@ plugins.factory('userPlugins', function() {
     tweetPlugin.name = 'Tweet';
 
     return {
-        plugins: [youtubePlugin, dailymotionPlugin, allocinePlugin, imagePlugin, spotifyPlugin, cloudmusicPlugin, googlemapPlugin, asciinemaPlugin, yrPlugin, gistPlugin, tweetPlugin]
+        plugins: [youtubePlugin, dailymotionPlugin, allocinePlugin, imagePlugin, videoPlugin, spotifyPlugin, cloudmusicPlugin, googlemapPlugin, asciinemaPlugin, yrPlugin, gistPlugin, tweetPlugin]
     };
 
 
