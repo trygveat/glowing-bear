@@ -281,6 +281,7 @@ weechat.controller('WeechatCtrl', ['$rootScope', '$scope', '$store', '$timeout',
 
     $rootScope.iterCandidate = null;
 
+    $store.bind($scope, "user", "");
     if (settings.savepassword) {
         $scope.$watch('password', function() {
             settings.password = $scope.password;
@@ -573,7 +574,7 @@ weechat.controller('WeechatCtrl', ['$rootScope', '$scope', '$store', '$timeout',
         $rootScope.errorMessage = false;
         $rootScope.bufferBottom = true;
         $scope.connectbutton = 'Connecting ...';
-        connection.connect(settings.host, settings.port, $scope.password, settings.ssl);
+        connection.connect(settings.host, settings.port, $scope.user, $scope.password, settings.ssl);
     };
     $scope.disconnect = function() {
         $scope.connectbutton = 'Connect';

@@ -16,14 +16,19 @@ weechat.factory('connection',
     var reconnectTimer;
 
     // Takes care of the connection and websocket hooks
-    var connect = function (host, port, passwd, ssl, noCompression, successCallback, failCallback) {
-        connectionData = [host, port, passwd, ssl, noCompression];
+    var connect = function (host, port, user, passwd, ssl, noCompression, successCallback, failCallback) {
+        connectionData = [host, port, user, passwd, ssl, noCompression];
         var proto = ssl ? 'wss' : 'ws';
         // If host is an IPv6 literal wrap it in brackets
         if (host.indexOf(":") !== -1) {
             host = "[" + host + "]";
         }
-        var url = proto + "://" + host + ":" + port + "/weechat";
+        if(user){
+            var url = proto + "://" + host + ":" + port + "/weechat-" + user;
+        } else {
+            var url = proto + "://" + host + ":" + port + "/weechat";
+        };
+
         $log.debug('Connecting to URL: ', url);
 
         var onopen = function () {
